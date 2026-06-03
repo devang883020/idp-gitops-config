@@ -1,0 +1,29 @@
+app:
+  name: sample-app
+  namespace: app-sample-app
+
+image:
+  repository: 529088266042.dkr.ecr.ap-south-1.amazonaws.com/sample-app
+  tag: latest        # ← Platform API updates this on every push
+  pullPolicy: Always
+
+service:
+  port: 8000
+
+replicas: 1
+
+env:
+  - name: APP_NAME
+    value: "sample-app"
+  - name: APP_VERSION
+    value: "1.0.0"
+  - name: ENV
+    value: "production"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi

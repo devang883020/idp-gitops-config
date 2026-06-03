@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-app
+  namespace: argocd
+  # Auto-delete app when this manifest is deleted
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    # ← Replace with YOUR gitops-config repo URL
+    repoURL: https://github.com/YOURUSERNAME/idp-gitops-config
+    targetRevision: HEAD
+    path: apps/sample-app       # Helm chart is here
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app-sample-app   # isolated namespace for this app
+  syncPolicy:
+    automated:
+      prune: true       # delete removed resources automatically
+      selfHeal: true    # fix manual changes automatically
+    syncOptions:
+      - CreateNamespace=true    # creates namespace if not exists!
