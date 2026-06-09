@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     # ← Replace with YOUR gitops-config repo URL
-    repoURL: https://github.com/YOURUSERNAME/idp-gitops-config
+    repoURL: https://github.com/devang883020/idp-gitops-config.git
     targetRevision: HEAD
     path: apps/sample-app       # Helm chart is here
     helm:
